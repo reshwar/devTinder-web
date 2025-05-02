@@ -10,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("Eshwar@123");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
   const LoginHandler = async () => {
     try {
       const loginResponse = await axios.post(
@@ -20,11 +21,10 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      console.log(loginResponse.data);
       dispatch(addUser(loginResponse.data));
       navigate("/");
     } catch (error) {
-      console.log(error);
+      setLoginError(error?.response.data);
     }
   };
 
@@ -71,6 +71,7 @@ const Login = () => {
                 placeholder="Password"
               />
             </label>
+            {loginError && <p className="text-error">{loginError}</p>}
             <div className=" card-actions mt-3 justify-center">
               <button onClick={LoginHandler} className="btn btn-primary">
                 Submit
