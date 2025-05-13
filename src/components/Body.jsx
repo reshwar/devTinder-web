@@ -11,6 +11,7 @@ const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const fetchUser = async () => {
+    console.log("calledddddd");
     try {
       const userProfile = await axios.post(
         BASE_URL + "profile/view",
@@ -25,13 +26,15 @@ const Body = () => {
     }
   };
   useEffect(() => {
+    console.log("called usee effect");
     fetchUser();
   }, []);
+  console.log("called");
   return (
     <>
       <NavBar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

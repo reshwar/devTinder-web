@@ -1,5 +1,32 @@
+import { useEffect } from "react";
+import ProfileEdit from "./profileEdit";
+import { Navigate } from "react-router-dom";
+
 const Profile = () => {
-  return <>Profile</>;
+  // const fetchUser = async () => {
+  //   console.log("calledddddd");
+  //   try {
+  //     const userProfile = await axios.post(
+  //       BASE_URL + "profile/view",
+  //       {},
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     dispatch(addUser(userProfile));
+  //   } catch (error) {
+  //     Navigate("/login");
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log("called usee effect");
+  //   fetchUser();
+  // }, []);
+  return (
+    <>
+      <ProfileEdit />
+    </>
+  );
 };
 
 export default Profile;
