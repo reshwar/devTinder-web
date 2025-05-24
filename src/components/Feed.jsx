@@ -26,7 +26,7 @@ const Feed = () => {
   }, []);
 
   return (
-    <>{feedDataFromStore && <UserCard userData={feedDataFromStore[1]} />}</>
+    <>{feedDataFromStore && <UserCard userData={feedDataFromStore[0]} />}</>
   );
 };
 

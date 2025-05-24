@@ -6,8 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("el123@gmail.com");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [emailId, setEmailId] = useState("em123@gmail.com");
   const [password, setPassword] = useState("Eshwar@123");
+  const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
@@ -28,12 +32,59 @@ const Login = () => {
     }
   };
 
+  const SignUpHandler = async () => {
+    try {
+      const signUpResponse = await axios.post(
+        BASE_URL + "signUp",
+        {
+          firstname,
+          lastname,
+          age,
+          emailId,
+          password,
+        },
+        { withCredentials: true }
+      );
+      dispatch(addUser(signUpResponse.data));
+      navigate("/profile");
+    } catch (error) {
+      setLoginError(error?.response.data);
+    }
+  };
+
   return (
     <>
       <div className="flex justify-center my-8 py-4">
         <div className="card w-96 bg-base-300 card-lg shadow-sm ">
           <div className="card-body">
-            <h2 className="card-title justify-center">Login</h2>
+            <h2 className="card-title justify-center">
+              {isLogin ? "Login" : "SignUp"}
+            </h2>
+            {!isLogin && (
+              <>
+                <input
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  type="text"
+                  placeholder="Firstname"
+                  className="input input-primary mt-5"
+                />
+                <input
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  type="text"
+                  placeholder="Lastname"
+                  className="input input-primary mt-5"
+                />
+                <input
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  type="text"
+                  placeholder="Age"
+                  className="input input-primary mt-5"
+                />
+              </>
+            )}
             <input
               value={emailId}
               onChange={(e) => setEmailId(e.target.value)}
@@ -72,11 +123,21 @@ const Login = () => {
               />
             </label>
             {loginError && <p className="text-error">{loginError}</p>}
+
             <div className=" card-actions mt-3 justify-center">
-              <button onClick={LoginHandler} className="btn btn-primary">
-                Submit
+              <button
+                onClick={isLogin ? LoginHandler : SignUpHandler}
+                className="btn btn-primary"
+              >
+                {isLogin ? "Submit" : "SignUp"}
               </button>
             </div>
+            <p
+              className="text-center mt-3 cursor-pointer"
+              onClick={() => setIsLogin(!isLogin)}
+            >
+              {isLogin ? "Click here to SignUp" : "Clcik here to Login"}
+            </p>
           </div>
         </div>
       </div>

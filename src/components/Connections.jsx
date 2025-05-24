@@ -67,21 +67,6 @@ const Connections = () => {
       </div>
     </>
   );
-  return (
-    <>
-      <div>
-        <div classname="">
-          <h1>Connections</h1>
-        </div>
-        <div className="flex-column justify-center">
-          {connectionsList &&
-            connectionsList.map((user) => {
-              return <div>{user.firstname}</div>;
-            })}
-        </div>
-      </div>
-    </>
-  );
 };
 
 export default Connections;
