@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ProfileEdit from "./profileEdit";
+import ProfileEdit from "./ProfileEdit";
 import { Navigate } from "react-router-dom";
 
 const Profile = () => {
