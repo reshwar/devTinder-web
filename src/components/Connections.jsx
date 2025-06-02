@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionsSlice";
+import { Link } from "react-router-dom";
 
 const Connections = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,17 @@ const Connections = () => {
                       </div>
                       <div>{user.about}</div>
                     </div>
+                    <Link to={"/chat/" + user._id}>
+                      <button
+                        className="btn btn-secondary ml-4 mt-4 mr-2"
+                        onClick={() => {
+                          // Handle disconnect logic here
+                          console.log("Disconnect clicked for", user._id);
+                        }}
+                      >
+                        Chat
+                      </button>
+                    </Link>
                   </div>
                 );
               })}
